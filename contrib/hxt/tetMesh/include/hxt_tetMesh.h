@@ -167,7 +167,7 @@ HXTStatus hxtTetMesh(HXTMesh* mesh,
  * mesh->lines.num:    nbr. of embedded edges
  * mesh->lines.size:   capacity, in edges, of the following array
  * mesh->lines.node[]: allocated with hxtAlignedMalloc(), 2 nodes per edge,
- *                      only edges that are not on in triangles are needed
+ *        !!!!!!!!     only edges that are not on in triangles are needed      !!!!!!!!  //llz emphasize
  * !mesh->lines.color[]
  *
  * mesh->points
@@ -175,7 +175,7 @@ HXTStatus hxtTetMesh(HXTMesh* mesh,
  * mesh->points.num:  nbr. of embedded points
  * mesh->points.size: capacity, in points, of the following array
  * mesh->points.node: allocated with hxtAlignedMalloc(), 1 node per point,
- *                     only pts that are not in triangles or lines are needed
+ *        !!!!!!!!    only pts that are not in triangles or lines are needed   !!!!!!!!  //llz emphasize
  * !mesh->points.color[]
  *
  * mesh->brep

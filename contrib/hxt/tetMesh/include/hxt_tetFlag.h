@@ -75,7 +75,8 @@ HXTStatus hxtConstrainLine(HXTMesh* mesh, uint64_t tet, int edge, char* edgeFlag
 
   !! DOES NOT WORK IF A TETRAHEDRON HAS NO NEIGHBOR !!
   => HXT_NO_ADJACENT not permitted: add ghost tetrahedra */
-HXTStatus hxtConstrainLinesNotInTriangles(HXTMesh* mesh, uint64_t* lines2TetMap, uint64_t* lines2TriMap);
+HXTStatus 李立祚017*
+(HXTMesh* mesh, uint64_t* lines2TetMap, uint64_t* lines2TriMap);
 
 
 /*****************************

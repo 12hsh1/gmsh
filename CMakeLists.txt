@@ -1704,6 +1704,36 @@ if(EXTERNAL_INCLUDES)
 endif()
 
 if(HAVE_FLTK)
+# llz add ----------------------------------------------------------
+  list(APPEND FLTK_LIBRARIES
+    D:/Code/3rd/fltk-install/lib/libfltk_images.a
+    D:/Code/3rd/fltk-install/lib/libfltk_png.a
+    D:/Code/3rd/fltk-install/lib/libfltk_jpeg.a
+    D:/Code/3rd/fltk-install/lib/libfltk_z.a
+    D:/Code/3rd/fltk-install/lib/libfltk_gl.a
+    D:/Code/3rd/fltk-install/lib/libfltk_forms.a
+    D:/Code/3rd/fltk-install/lib/libfltk.a
+    )
+  if(WIN32)
+    list(APPEND FLTK_LIBRARIES
+      gdiplus    # GDI+ 库（重要！）
+      gdi32      # GDI 库
+      ole32      # OLE 库
+      uuid       # UUID 库
+      comctl32   # Common Controls
+      comdlg32   # Common Dialogs
+      ws2_32     # Winsock
+      opengl32   # OpenGL
+      glu32      # GLU
+      msimg32    # MSIMG（可能需要）
+      winmm      # Windows Multimedia
+      kernel32   # Kernel
+      user32     # User32
+      shell32    # Shell
+      advapi32   # Advanced API
+    )
+  endif()
+# llz add  ---------------------------------------------------------
   set(LINK_LIBRARIES ${FLTK_LIBRARIES} ${EXTERNAL_LIBRARIES}
                      ${OPENGL_LIBRARIES} ${LAPACK_LIBRARIES})
 elseif(HAVE_OPENGL)
@@ -1804,6 +1834,7 @@ if(ENABLE_BUILD_SHARED OR ENABLE_BUILD_DYNAMIC)
             "won't link. In MSVC change /MT to /MD in the shared project properties")
   endif()
 endif()
+
 
 # binary targets
 if(HAVE_FLTK)
@@ -2333,6 +2364,13 @@ if(ENABLE_TESTS AND NOT DISABLE_GMSH_TESTS)
   endif()
 endif()
 
+#llz add compile options for large object files on Windows with gcc/clang
+target_compile_options(gmsh PRIVATE
+  $<$<CXX_COMPILER_ID:GNU>:-Wa,-mbig-obj>
+  $<$<CXX_COMPILER_ID:Clang>:-Wa,-mbig-obj>
+)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og -g")
+#llz add ----------------------------------------------------------------
 message(STATUS "")
 message(STATUS "Gmsh ${GMSH_VERSION} has been configured for ${GMSH_OS}")
 message(STATUS "")
